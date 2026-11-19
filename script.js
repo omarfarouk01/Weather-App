@@ -1,6 +1,7 @@
 async function getWeather() {
 
-    const city = document.getElementById("cityInput").value;
+    const city = document.getElementById("cityInput").value.trim();
+        const loading = document.getElementById("loading");
 
     if (city === "") {
         alert("Please enter a city name");
@@ -8,6 +9,7 @@ async function getWeather() {
     }
 
     try {
+                loading.style.display = "block";
         // Find the city coordinates
         const geoResponse = await fetch(
             `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`
@@ -48,8 +50,10 @@ async function getWeather() {
         document.getElementById("weatherIcon").textContent =
     getWeatherIcon(current.weather_code);
 
-    } catch (error) {
+        } catch (error) {
         alert("Something went wrong. Please try again.");
+        } finally {
+        loading.style.display = "none";
     }
 }
 
