@@ -45,6 +45,8 @@ async function getWeather() {
 
         document.getElementById("description").textContent =
             getDescription(current.weather_code);
+        document.getElementById("weatherIcon").textContent =
+    getWeatherIcon(current.weather_code);
 
     } catch (error) {
         alert("Something went wrong. Please try again.");
@@ -62,4 +64,17 @@ function getDescription(code) {
     if (code <= 99) return "Thunderstorm";
 
     return "Unknown Weather";
+}
+function getWeatherIcon(code) {
+
+    if (code === 0) return "☀️";
+    if (code <= 3) return "🌤️";
+    if (code <= 48) return "🌫️";
+    if (code <= 67) return "🌧️";
+    if (code <= 77) return "❄️";
+    if (code <= 82) return "🌦️";
+    if (code <= 86) return "🌨️";
+    if (code <= 99) return "⛈️";
+
+    return "🌤️";
 }
